@@ -69,25 +69,18 @@ export class FormComponent implements OnInit{
   async searchImageByCategory() {    
     this.images = await this.imagesServices.getImageByCategory(this.categoryValue?.value); 
     this.imagesServices.setSubject(this.images);
-    console.log("Categoria");
-
   }
 
   /*TODO: Busca las imagenes por palabra en espanol*/ 
   async searchImageByWord() {    
     this.images =  await this.imagesServices.getImageByWord(this.textImages?.value);
     this.imagesServices.setSubject(this.images);
-    console.log("PAlabra");
-    
   }
 
-  /*TODO: Busca las imagenes por palabra en espanol*/ 
+  /*TODO: Busca las imagenes por ambos criterios*/ 
   async searchImageByWordAndCategory() {    
     this.images =  await this.imagesServices.getImageByWordAndCategory(this.categoryValue?.value,this.textImages?.value);
-    this.imagesServices.setSubject(this.images);
-    console.log("Ambos");
-    
-    
+    this.imagesServices.setSubject(this.images); 
   }
 }
 

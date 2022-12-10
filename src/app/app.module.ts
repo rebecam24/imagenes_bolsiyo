@@ -13,7 +13,7 @@ import { ImagesListComponent } from './components/images-list/images-list.compon
     AppComponent,
     FormComponent,
     ToolbarComponent,
-    ImagesListComponent
+    ImagesListComponent,
   ],
   imports: [
     BrowserModule,
