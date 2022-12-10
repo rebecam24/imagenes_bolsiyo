@@ -1,0 +1,13 @@
+<!-- TODO: Muestra un listado de imagenes iniciales -->
+<div class="container-fluid">  
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center flex-wrap">
+      <a href="#" target="_blank">
+        <img 
+        class="col-md-3 rounded img-fluid img-thumbnail img-dim m-1" 
+        *ngFor="let item of images.hits" 
+        [src]="item.webformatURL" />
+      </a>
+    </div>
+  </div>
+</div>
