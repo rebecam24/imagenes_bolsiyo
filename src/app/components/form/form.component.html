@@ -3,7 +3,7 @@
     <h1 class="display-3 text-center size">Filtro de Imágenes</h1>
     <div class="row">
       <div class="col-md-8 offset-md-2 col-sm-6 offset-sm-4 col-lg-8">
-        <form [formGroup]="imagesForm" (ngSubmit)="searchImage()">
+        <form [formGroup]="imagesForm" (ngSubmit)="searchImage()" (keypress.enter)="searchImage()">
           <div class="form-group">
             <input 
               type="text"

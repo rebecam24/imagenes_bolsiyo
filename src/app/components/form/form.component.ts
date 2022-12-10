@@ -49,20 +49,45 @@ export class FormComponent implements OnInit{
 
   /*TODO: Busca las imagenes segun el campo que seleccione*/ 
   searchImage() {
-    this.searchImageByCategory();  
-    this.searchImageByWord();   
+    if(this.textImages?.value != '' && this.categoryValue?.value != '') {
+      this.searchImageByWordAndCategory();
+      return;
+    }
+
+    if(this.textImages?.value != '') {
+      this.searchImageByWord();   
+      return
+    }
+    
+    if(this.categoryValue?.value != '') {
+      this.searchImageByCategory();
+      return
+    }
   }
 
   /*TODO: Busca las imagenes por categoria*/ 
-  searchImageByCategory() {    
-    this.imagesServices.getImageByCategory(this.categoryValue?.value)
-    .subscribe(image => this.images = image);    
+  async searchImageByCategory() {    
+    this.images = await this.imagesServices.getImageByCategory(this.categoryValue?.value); 
+    this.imagesServices.setSubject(this.images);
+    console.log("Categoria");
+
   }
 
   /*TODO: Busca las imagenes por palabra en espanol*/ 
-  searchImageByWord() {    
-    this.imagesServices.getImageByWord(this.textImages?.value)
-    .subscribe(image => this.images = image);    
+  async searchImageByWord() {    
+    this.images =  await this.imagesServices.getImageByWord(this.textImages?.value);
+    this.imagesServices.setSubject(this.images);
+    console.log("PAlabra");
+    
+  }
+
+  /*TODO: Busca las imagenes por palabra en espanol*/ 
+  async searchImageByWordAndCategory() {    
+    this.images =  await this.imagesServices.getImageByWordAndCategory(this.categoryValue?.value,this.textImages?.value);
+    this.imagesServices.setSubject(this.images);
+    console.log("Ambos");
+    
+    
   }
 }
 
