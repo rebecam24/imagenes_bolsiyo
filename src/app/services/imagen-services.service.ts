@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DataResponse, Images } from '../Interfaces/images';
+import { BehaviorSubject } from 'rxjs';
+import { DataResponse } from '../Interfaces/images';
 import { enviroment } from '../../enviroments/enviroment';
 
 @Injectable({
