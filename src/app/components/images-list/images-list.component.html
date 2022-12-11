@@ -1,8 +1,8 @@
-<!-- TODO: Muestra un listado de imagenes iniciales -->
+<!-- TODO: Muestra el listado de imagenes-->
 <div class="container-fluid">  
   <div class="row">
     <div class="col-md-12 d-flex justify-content-center flex-wrap" >
-      <a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" >
+      <a data-bs-toggle="modal" data-bs-target="#previewModal" >
         <img 
         class="col-md-3 rounded img-fluid img-thumbnail img-dim m-1" 
         *ngFor="let item of dataImages.hits"
@@ -14,7 +14,7 @@
 </div>
 
    <div>
-  <!--TODO: Modal de vista previa -->
+  <!--TODO: Modal de vista previa de la imagen seleccionada -->
   <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

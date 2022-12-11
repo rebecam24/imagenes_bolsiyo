@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ImagenServicesService } from 'src/app/services/imagen-services.service';
 import { DataResponse, Images } from '../../Interfaces/images';
+import { loadedImages, loadImages, loadOneImage } from '../../state/actions/images.actions';
+import { Observable } from 'rxjs';
+import { selectLoading } from '../../state/selectors/images.selectors';
 
 @Component({
   selector: 'images-list',
@@ -13,10 +17,12 @@ export class ImagesListComponent implements OnInit,AfterViewInit{
   public imageSelected: string = '';
   public likes: number = -1;
   public views: number = -1;
-  data:any; // ==>borrar
+  data:any;
+  loading$: Observable<boolean> = new Observable();
 
   constructor(
-    private imagesServices: ImagenServicesService
+    private imagesServices: ImagenServicesService,
+    private store: Store<any>
     ) { 
       this.dataImages = {hits:[],total:0,totalHits:0};
       this.data = this.imagesServices.subject.subscribe(resp=>{
@@ -25,11 +31,13 @@ export class ImagesListComponent implements OnInit,AfterViewInit{
   } 
 
   ngOnInit(): void {
+    this.loading$ = this.store.select(selectLoading);
+    this.store.dispatch(loadImages())
     this.getAllImages();
   }
 
   ngOnDestroy(): void {
-   this.data.unsubscribe() //===>>> para borrar 
+    this.data.unsubscribe();
   }
   
   ngAfterViewInit(): void {
@@ -40,10 +48,12 @@ export class ImagesListComponent implements OnInit,AfterViewInit{
   /* TODO: Metodo para obtener todas las imagenes sin filtro*/ 
   async getAllImages() {
     this.dataImages = await this.imagesServices.getImages();
+    this.store.dispatch(loadedImages( { dataImages: this.dataImages })) //TODO: Se lanza la accion para saber si es success la carga de las imagenes
   }
 
   //TODO: Metodo para obtener la data de una sola imagen
   previewImage(item:Images) {
+    this.store.dispatch(loadOneImage( { image: item })) //TODO: Se lanza la accion para guardar en el store la info de una sola imagen
     this.views = item.views;
     this.likes = item.likes;
     this.imageSelected = item.webformatURL;
