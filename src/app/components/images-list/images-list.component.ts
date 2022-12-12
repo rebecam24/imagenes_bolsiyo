@@ -17,6 +17,8 @@ export class ImagesListComponent implements OnInit,AfterViewInit{
   public imageSelected: string = '';
   public likes: number = -1;
   public views: number = -1;
+  public currentPage: any;
+  public itemsPerPage: number = 10;
   data:any;
   loading$: Observable<boolean> = new Observable();
 

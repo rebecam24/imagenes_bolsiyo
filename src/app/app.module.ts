@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './state/app.state';
 import { ModalComponent } from './components/modal/modal.component';
+import { AngularPaginatorModule } from 'angular-paginator';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalComponent } from './components/modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularPaginatorModule,
     StoreModule.forRoot(ROOT_REDUCERS),//TODO: se genera luego de instalar ngrx store
     StoreDevtoolsModule.instrument({ name: 'TEST'}) //TODO: storeDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }) Se genera importacion por instalar store devtool se agrega name:'TEST' para hacer pruebas
   ],
