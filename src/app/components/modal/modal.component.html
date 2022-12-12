@@ -1,0 +1,29 @@
+<!-- TODO: modal para mostrar preview -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5" id="previewModalLabel">Vista previa de la imagen seleccionada</h5>
+        <button type="button" class="btn-close rounded-circle border-0" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <img 
+          class="rounded img-fluid" 
+          [src]="imageSelected" />
+        </div>  
+        <div class="modal-footer">          
+          <span class="badge bg-danger text-white"> {{ likes }} <i class="bi bi-suit-heart"></i></span>              
+          <span class="badge bg-info text-white">{{ views }} <i class="bi bi-eye"></i></span>              
+        </div>        
+      </div>
+      <div class="modal-footer">        
+        <span 
+          class="badge rounded-pill bg-info text-white"
+          *ngFor="let tag of tags">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
+</div>

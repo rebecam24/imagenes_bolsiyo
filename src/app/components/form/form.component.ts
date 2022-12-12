@@ -13,6 +13,7 @@ export class FormComponent implements OnInit{
   public imagesForm: FormGroup;
   public categories: Categories[] = [];
   public images: any;
+  public showSpinner = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +39,7 @@ export class FormComponent implements OnInit{
   /*TODO: Metodo que carga los valores de las categorias en el select*/ 
   setCategories() {
     this.categories = [
+      { value: '',   name: 'Selecciona una categoria' },
       { value: 'science',   name: 'science' },
       { value: 'education', name: 'education' },
       { value: 'people',    name: 'people' },
@@ -48,41 +50,10 @@ export class FormComponent implements OnInit{
   }
 
   /*TODO: Busca las imagenes segun el campo que seleccione*/ 
-  searchImage() {
-    if(this.textImages?.value != '' && this.categoryValue?.value != '') {
-      this.searchImageByWordAndCategory();
-      return;
-    }
-
-    if(this.textImages?.value != '') {
-      this.searchImageByWord();   
-      return
-    }
-    
-    if(this.categoryValue?.value != '') {
-      this.searchImageByCategory();
-      return
-    }
-  }
-
-  /*TODO: Busca las imagenes por categoria*/ 
-  async searchImageByCategory() {    
-    this.images = await this.imagesServices.getImageByCategory(this.categoryValue?.value); 
+  async searchImage() {
+    this.showSpinner = true;
+    this.images =  await this.imagesServices.getImageByWordOrCategory(this.categoryValue?.value,this.textImages?.value);  
+    this.showSpinner = false;
     this.imagesServices.setSubject(this.images);
-  }
-
-  /*TODO: Busca las imagenes por palabra en espanol*/ 
-  async searchImageByWord() {    
-    this.images =  await this.imagesServices.getImageByWord(this.textImages?.value);
-    this.imagesServices.setSubject(this.images);
-  }
-
-  /*TODO: Busca las imagenes por ambos criterios*/ 
-  async searchImageByWordAndCategory() {    
-    this.images =  await this.imagesServices.getImageByWordAndCategory(this.categoryValue?.value,this.textImages?.value);
-    this.imagesServices.setSubject(this.images); 
   }
 }
-
-
-

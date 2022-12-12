@@ -1,14 +1,13 @@
 <!-- TODO: formulario -->
-<div class="jumbotron jumbotron-fluid mt-5">
+<div class="jumbotron jumbotron-fluid modal-static sticky-top">
   <div class="container-fluid">
-    <h1 class="display-3 text-center size">Filtro de Imágenes</h1>
-    <div class="row">
-      <div class="col-md-8 offset-md-2 col-sm-6 offset-sm-4 col-lg-8">
-        <form [formGroup]="imagesForm" (ngSubmit)="searchImage()" (keypress.enter)="searchImage()">
-          <div class="form-group">
+    <div class="flex-row">
+      <div class="col-md-12 col-sm-6 col-lg-12">
+        <form class="form-inline" [formGroup]="imagesForm" (ngSubmit)="searchImage()" (keypress.enter)="searchImage()">
+          <div class="form-group col-md-5 col-sm-5 col-lg-5">
             <input 
               type="text"
-              class="form-control"
+              class="form-control w-100"
               placeholder="Buscador de Imágenes por palabra"
               id="textImages"
               name="textImages"
@@ -16,15 +15,24 @@
               formControlName="textImages"
             />
           </div>
-          <div class="form-group">
-            <label for="selectCategory">Categorías</label>
-            <select class="form-control form-select" id="selectCategory" formControlName="categoryValue">
+          <div class="form-group col-md-5 col-sm-5 col-lg-5">
+            <select class="form-control form-select w-100" id="selectCategory" formControlName="categoryValue">
               <option [value]="category.value" *ngFor="let category of categories">{{ category.name }}</option>                 
             </select>            
           </div>
-          <button type="submit" class="btn btn-primary">Buscar</button>
+          <button type="submit" class="btn btn-primary col-md-2 col-sm-2 col-lg-2">Buscar</button>
         </form>
       </div>
     </div>    
+  </div>
+</div>
+<div>
+  <!-- TODO: Spinner durante la busqueda -->
+<div class="text-center" *ngIf="showSpinner">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>

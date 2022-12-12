@@ -14,7 +14,7 @@ export class ImagenServicesService {
     hits:[],total:0,totalHits:0
   });
 
-  private baseUrl = `${enviroment.urlBase}/api/?${enviroment.key}`;
+  private baseUrl = `${enviroment.baseUrl}/api/?key=${enviroment.key}`;
 
   constructor( private http: HttpClient ) { }
 
@@ -28,24 +28,16 @@ export class ImagenServicesService {
     })
   }
 
-  /*TODO: Servicio que obtiene imagenes por filtro de categoria*/ 
-  getImageByCategory(category: string): Promise<DataResponse> {   
-    return new Promise((resolve,reject)=>{
-      this.http.get<DataResponse>(`${ this.baseUrl }&category=${ category }`).subscribe(resp => resolve(resp));
-    })
-  }
+  /*TODO: Servicio que filtra por palabra y/o categoria*/ 
+  getImageByWordOrCategory(category?: string, word?: string): Promise<DataResponse> {  
+    const url = `${ this.baseUrl }`;
+    const searchByCategory = category ? `&category=${ category }` : '';
+    const searchByWord = word ? `&lang=es&q=${ word }` : '';
 
-  /*TODO: Servicio que obtiene imagenes por filtro de palabra en espanol*/ 
-  getImageByWord(word: string): Promise<DataResponse> {    
+    const search = url + searchByCategory + searchByWord
+    
     return new Promise((resolve,reject)=>{
-      this.http.get<DataResponse>(`${ this.baseUrl }&lang=es&q=${ word }`).subscribe(resp => resolve(resp));
-    })
-  }
-
-  /*TODO: Servicio que filtra por palaba y categoria*/ 
-  getImageByWordAndCategory(category: string, word: string): Promise<DataResponse> {    
-    return new Promise((resolve,reject)=>{
-      this.http.get<DataResponse>(`${ this.baseUrl }&lang=es&q=${ word }&category=${ category }`).subscribe(resp => resolve(resp));
+      this.http.get<DataResponse>(search).subscribe(resp => resolve(resp));
     })
   }
 

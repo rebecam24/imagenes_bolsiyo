@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -10,6 +9,7 @@ import { ImagesListComponent } from './components/images-list/images-list.compon
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './state/app.state';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { ROOT_REDUCERS } from './state/app.state';
     FormComponent,
     ToolbarComponent,
     ImagesListComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
