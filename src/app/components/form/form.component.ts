@@ -14,6 +14,7 @@ export class FormComponent implements OnInit{
   public categories: Categories[] = [];
   public images: any;
   public showSpinner = false;
+  public alert = false;
 
   constructor(
     private fb: FormBuilder,
@@ -52,8 +53,15 @@ export class FormComponent implements OnInit{
   /*TODO: Busca las imagenes segun el campo que seleccione*/ 
   async searchImage() {
     this.showSpinner = true;
-    this.images =  await this.imagesServices.getImageByWordOrCategory(this.categoryValue?.value,this.textImages?.value);  
+    this.images =  await this.imagesServices.getImageByWordOrCategory(this.categoryValue?.value,this.textImages?.value);
+    this.alert = false;  
     this.showSpinner = false;
     this.imagesServices.setSubject(this.images);
+
+    if (this.images.hits.length == 0) {    
+      this.alert = true;  
+      this.textImages?.setValue("");
+      this.categoryValue?.setValue("");
+    }    
   }
 }

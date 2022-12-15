@@ -36,3 +36,10 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
+<!-- TODO: alerta para cuando no existen resultados de la busqueda -->
+<div class="alert alert-dismissible alert-primary" *ngIf="alert">
+  <button type="button" class="btn-close close border-0" data-bs-dismiss="alert" aria-label="Close" (click)="searchImage()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>No hay imágenes que coincidan con tu búsqueda.</strong> <span > Cambia tu consulta</span> e intenta de nuevo.
+</div>

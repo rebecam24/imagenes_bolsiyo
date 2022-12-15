@@ -1,8 +1,17 @@
-.img-dim{
+.img-dim {
 	width: 200px;
 	height: 200px;
 	object-fit: cover;
 	cursor: pointer;
+}
+
+img:hover {
+	-webkit-transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-o-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	transform: scale(1.5);
+	z-index: 5;
 }
 
 @media only screen and (max-width: 475px) {
